@@ -11,6 +11,7 @@ const GetStarted = () => {
           width: "1120px",
           height: "266px",
           marginTop: "120px",
+          boxShadow: "0px 0px 9px 4px #00000040",
         }}
       >
         {/* Title */}
@@ -19,7 +20,7 @@ const GetStarted = () => {
           style={{
             width: "640px",
             height: "64px",
-            top: "25px",
+            top: "15px",
             left: "240px",
           }}
         >
@@ -32,7 +33,7 @@ const GetStarted = () => {
           style={{
             width: "1092px",
             height: "5px",
-            top: "132px", // slightly lowered for gap
+            top: "112px", // slightly lowered for gap
             left: "14px",
           }}
         ></div>
@@ -44,6 +45,7 @@ const GetStarted = () => {
             top: "163px",
             left: "54px",
             width: "1012px",
+            gap: "16px",
           }}
         >
           {/* Dropdown */}
@@ -77,33 +79,48 @@ const GetStarted = () => {
           <input
             type="text"
             placeholder="Name"
-            className="w-[194px] h-[45px] rounded-[7px] bg-[#F2F2F2] pl-[14px] pr-[10px] font-['Inter'] text-[13px] text-[#B7B7B7] leading-[31.52px] tracking-[-0.02em] outline-none border-none placeholder:text-[#B7B7B7]"
+            className="w-[194px] h-[45px] rounded-[7px] bg-[#F2F2F2] pr-[10px] font-['Inter'] text-[13px] text-[#B7B7B7] leading-[31.52px] tracking-[-0.02em] outline-none border-none placeholder:text-[#B7B7B7]"
+            style={{
+              paddingLeft: "20px",
+            }}
           />
 
           {/* Phone */}
           <input
             type="text"
             placeholder="Phone"
-            className="w-[194px] h-[45px] rounded-[7px] bg-[#F2F2F2] pl-14 font-['Inter'] text-[13px] text-[#B7B7B7] leading-[31.52px] tracking-[-0.02em] outline-none border-none placeholder:text-[#B7B7B7]"
+            className="w-[194px] h-[45px] rounded-[7px] bg-[#F2F2F2] font-['Inter'] text-[13px] text-[#B7B7B7] leading-[31.52px] tracking-[-0.02em] outline-none border-none placeholder:text-[#B7B7B7]"
+            style={{
+              paddingLeft: "20px",
+            }}
           />
 
           {/* Email */}
           <input
             type="email"
             placeholder="Email"
-            className="w-[194px] h-[45px] rounded-[7px] bg-[#F2F2F2] pl-14 font-['Inter'] text-[13px] text-[#B7B7B7] leading-[31.52px] tracking-[-0.02em] outline-none border-none placeholder:text-[#B7B7B7]"
+            className="w-[194px] h-[45px] rounded-[7px] bg-[#F2F2F2] font-['Inter'] text-[13px] text-[#B7B7B7] leading-[31.52px] tracking-[-0.02em] outline-none border-none placeholder:text-[#B7B7B7]"
+            style={{
+              paddingLeft: "20px",
+            }}
           />
 
           {/* Get Started Button */}
-          <button
-            className="rounded-[10px] font-['Inter'] font-medium text-[18px] text-[#000000] bg-[#FFF000] hover:bg-[#ffec00] transition-all shadow-[0_4px_12px_rgba(0,0,0,0.25)]"
+          {/* <button
+            className="rounded-[10px] font-['Inter'] font-medium text-[18px] text-[#000000] bg-[#FFF000] hover:bg-[#000000] hover:text-[#FFF000] transition-all shadow-[0_4px_12px_rgba(0,0,0,0.25)] border-none"
             style={{
-              width: "187px",
+              width: "500px",
               height: "64px",
             }}
           >
             Get Started
-          </button>
+          </button> */}
+          <button
+  className="rounded-[10px] font-['Inter'] font-medium text-[18px] text-[#000000] bg-[#FFF000] hover:bg-[#000000] hover:text-[#FFF000] transition-all shadow-[0_4px_12px_rgba(0,0,0,0.25)] border-none w-[700px] h-[64px]"  // Set width with Tailwind
+>
+  Get Started
+</button>
+
         </div>
       </div>
     </section>

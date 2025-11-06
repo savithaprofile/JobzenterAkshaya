@@ -5,7 +5,11 @@ export default {
       "./src/**/*.{js,jsx,ts,tsx}", // 👈 This line is critical
     ],
     theme: {
-      extend: {},
+      extend: {
+        fontFamily: {
+          sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],
+        },
+      },
     },
     plugins: [],
   };
