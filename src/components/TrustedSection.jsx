@@ -4,19 +4,16 @@ import React from "react";
 
 const TrustedSection = () => {
   return (
-    <section className="relative flex justify-between items-center px-[160px] py-[120px] bg-white">
+    <section className="relative flex justify-between items-start px-[160px] py-[120px] bg-white">
       {/* LEFT SIDE - TEXT */}
-      <div className="max-w-[600px]">
-        <h2 className="font-['Inter'] font-bold text-[30px] text-[#000000] leading-[42px] mb-[24px] relative">
-          Trusted by thousands, we help careers grow with{" "}
-          <span className="relative text-[#000000] font-bold">
-            confidence.
-            {/* Yellow underline (#FFC107) */}
-            <span className="absolute ml-[-170px] left-115 bottom-[-5px] w-[168px] h-[12px] bg-[#FFC107]"></span>
-          </span>
+      <div className="max-w-[600px] flex-shrink-0">
+        
+        <h2 className="font-['Inter'] font-bold text-[31px] text-[#000000] leading-[38px] mb-[24px]">
+          Trusted by thousands, we help careers<br />
+          grow with confidence.
         </h2>
 
-        <p className="font-['Inter'] text-[18px] leading-[35px] text-[#000000]">
+        <p className="font-['Inter'] text-[18.1px] leading-[35px] text-[#000000] max-w-[500px]">
           At JobZenter, we are trusted by thousands of aspiring professionals who
           rely on us to shape their future with confidence. Our proven training
           programs and dedicated placement support have helped students, freshers,
@@ -29,10 +26,9 @@ const TrustedSection = () => {
         </p>
       </div>
 
-  {/* RIGHT SIDE - IMAGES + 100% BADGE */}
-  {/* give the wrapper the same height as the images so absolutely positioned badge can center */}
-  <div className="relative flex items-center gap-[40px] ml-[20px]" style={{ height: "611.47px" }}>
-        {/* LEFT IMAGE */}
+      {/* RIGHT SIDE - IMAGES */}
+      <div className="relative flex items-start gap-[20px] ml-auto">
+        {/* LEFT IMAGE - slightly taller and positioned higher */}
         <img
           src="/place1.png"
           alt="Team Discussion"
@@ -41,22 +37,22 @@ const TrustedSection = () => {
             width: "310.73px",
             height: "611.47px",
             opacity: 1,
+            marginTop: "0px",
           }}
         />
 
-        {/* RIGHT IMAGE */}
+        {/* RIGHT IMAGE - positioned slightly lower */}
         <img
           src="/place2.png"
           alt="Mentorship Session"
           className="object-cover rounded-[152.87px]"
           style={{
             width: "310.73px",
-            height: "611.47px",
+            height: "580px",
             opacity: 1,
+            marginTop: "20px",
           }}
         />
-
-        
       </div>
     </section>
   );

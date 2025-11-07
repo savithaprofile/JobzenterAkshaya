@@ -56,10 +56,10 @@ const StudentReviews = () => {
     <section className="bg-white py-[80px] flex flex-col items-center">
       {/* Section Header */}
       <div className="text-center mb-[40px]">
-        <h2 className="text-[32px] font-[800] font-['Inter'] text-[#000000]">
-          What Our Students <span className="text-[#F7A600] underline decoration-[#F7A600]">Says</span>
+        <h2 className="text-[32px] font-[700] font-['Inter'] text-[#000000]">
+          What Our Students Says
         </h2>
-        <p className="mt-[8px] text-[15px] text-[#000000B3]">
+        <p className="mt-[8px] text-[15px] text-[#000000]">
           Real stories from learners who transformed their careers with us.
         </p>
       </div>
@@ -68,7 +68,7 @@ const StudentReviews = () => {
       {index > 0 && (
         <button
           onClick={prevReviews}
-          className="mb-[20px] w-[56px] h-[56px] bg-white border border-[#EAEAEA] rounded-full shadow-[0_3px_10px_rgba(0,0,0,0.15)] flex items-center justify-center hover:scale-105 transition-transform"
+          className="mb-[-25px] w-[60px] z-10 h-[60px] bg-white border border-[#EAEAEA] rounded-full shadow-[0_3px_10px_rgba(0,0,0,0.15)] flex items-center justify-center hover:scale-105 transition-transform"
         >
           <IoChevronUp className="text-[28px] text-black" />
         </button>
@@ -79,7 +79,7 @@ const StudentReviews = () => {
         {reviews.slice(index, index + 2).map((r, i) => (
           <div
             key={i}
-            className="relative w-[600px] min-h-[180px] bg-white border-l-[6px] border-b-[6px] border-[#FFF000] rounded-[10px] shadow-[0_4px_20px_rgba(0,0,0,0.08)] p-[28px]"
+            className="relative w-[600px] min-h-[180px] bg-white border-r-[8px] border-b-[11px] border-[#FFF000] rounded-[10px] shadow-[0_4px_20px_rgba(0,0,0,0.08)] p-[28px]"
           >
             {/* Stars */}
             <div className="flex gap-[3px] mb-[8px] text-[#FFC107] bg-white">
@@ -123,7 +123,7 @@ const StudentReviews = () => {
               <p className="text-[10px] text-[#555555] bg-white -mt-[14px] px-[10px] mb-[8px]">{r.role}</p>
               
               {/* Like and Dislike Buttons */}
-              <div className="flex gap-4 px-[10px]">
+              <div className="flex gap-6 px-[19px]">
                 {/* Like Button - Yellow */}
                 <button className="w-[26px] h-[26px] rounded-full bg-[#FFF000] flex items-center justify-center hover:opacity-80 transition-opacity border-none">
                   <FaThumbsUp className="text-[12px] text-black" />
@@ -136,8 +136,7 @@ const StudentReviews = () => {
             </div>
             </div>
 
-            {/* Yellow Background Shadow */}
-            {/* <div className="absolute top-[8px] left-[8px] w-full h-full bg-[#FFF000] rounded-[10px] -z-[1]"></div> */}
+           
           </div>
         ))}
       </div>
@@ -146,7 +145,7 @@ const StudentReviews = () => {
       {index + 2 < reviews.length && (
         <button
           onClick={nextReviews}
-          className="mt-[50px] w-[56px] h-[56px] bg-white border border-[#EAEAEA] rounded-full shadow-[0_3px_10px_rgba(0,0,0,0.15)] flex items-center justify-center hover:scale-105 transition-transform"
+          className="mt-[-25px] w-[60px] h-[60px] bg-white border border-[#EAEAEA] rounded-full shadow-[0_3px_10px_rgba(0,0,0,0.15)] flex items-center justify-center hover:scale-105 transition-transform z-10"
         >
           <IoChevronDown className="text-[28px] text-black" />
         </button>
