@@ -1,3 +1,4 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 @tailwind base;
@@ -37,3 +38,56 @@ body {
   vertical-align: middle;
 }
 
+@keyframes slideDown {
+  0% {
+    transform: scaleY(0.9);
+    opacity: 0;
+  }
+  60% {
+    transform: scaleY(1.02);
+    opacity: 1;
+  }
+  100% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+
+
+/* Custom styles for TopRatedCourses semicircle and hover effect */
+.course-card {
+  position: relative;
+  overflow: hidden;
+  background: #fff;
+  transition: background 0.4s cubic-bezier(.4,0,.2,1);
+}
+.course-card::before {
+  content: '';
+  position: absolute;
+  left: 0px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 110px;
+  height: 240px;
+  background: rgba(253, 240, 1, 0.35);
+;
+;
+  /* border-radius: 90px 0 0 90px; */
+   border-radius: 0 90px 90px 0;
+  transition: all 0.4s cubic-bezier(.4,0,.2,1);
+  z-index: 1;
+  opacity: 0.7;
+  pointer-events: none;
+}
+.course-card:hover::before,
+/* On hover, do not change the semicircle. Keep it fixed. */
+
+.course-card:hover,
+.course-card.group:hover {
+  background: #FDF00159;
+
+}
+.course-card-content {
+  position: relative;
+  z-index: 2;
+}

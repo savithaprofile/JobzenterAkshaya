@@ -13,7 +13,7 @@ const TopRatedCourses = () => {
       description: "React Native Fullstack development combines React Native for mobile apps with Node.js, Express, and a database (like MongoDB or PostgreSQL) on the backend.",
       image: "/reactnative.png",
       stars: ["/star1i120-ds8j.svg", "/star2i120-c1xf.svg", "/star3i120-xnzh.svg", "/star4i120-py9o.svg", "/star5i120-mwov.svg"],
-      buttonStyle: "h-[30px] w-[190px] px-[14px] rounded-[6px] bg-[#000000] text-[#FFFFFF] text-[12px] mt-[5px]"
+      buttonStyle: "h-[30px] w-[190px] px-[14px] rounded-[6px] bg-[#000000] text-[#FFFFFF] text-[12px] mt-[5px] ml-[20px]" 
     },
     {
       id: 2,
@@ -100,14 +100,13 @@ const TopRatedCourses = () => {
         {/* Cards Row */}
         <div className="mt-[28px] px-[140px] flex gap-[90px] justify-center">
           {visibleCourses.map((course) => (
-            <div key={course.id} className="group relative w-[340px] h-[400px] rounded-[18px] bg-[#FFFFFF] shadow-[0_8px_24px_rgba(0,0,0,0.15)] overflow-hidden transition-all duration-300 ease-out">
+            <div key={course.id} className="course-card group relative w-[340px] h-[400px] rounded-[18px] bg-[#FFFFFF] shadow-[0_8px_24px_rgba(0,0,0,0.15)] overflow-hidden transition-all duration-300 ease-out">
               {/* image */}
-              <div className="relative z-[1] h-[170px] flex items-start justify-center pt-[10px]">
+              <div className="relative z-[2] h-[170px] flex items-start justify-center pt-[10px]">
                 <img src={course.image} alt={course.title} className="w-[280px] h-[200px] object-cover rounded-[14px]" />
               </div>
-              {/* content area with left semicircle background */}
-              <div className="relative px-[18px] pt-[28px] pb-[18px] bg-white transition-colors duration-300 ease-out group-hover:bg-[#FDF001]">
-                <div className="pointer-events-none absolute -left-[160px] bottom-0 w-[329px] h-[329px] rounded-full bg-[#FDF001]/35 group-hover:opacity-0" />
+              {/* content area */}
+              <div className="course-card-content relative px-[18px] pt-[28px] pb-[18px]">
                 <h3 className="text-[15px] font-[700] text-black">{course.title}</h3>
                 <p className="mt-[8px] text-[11px] leading-[16px] text-black/70">
                   {course.description}
@@ -118,7 +117,7 @@ const TopRatedCourses = () => {
                   ))}
                 </div>
                 {course.buttonWrapper ? (
-                  <div className="flex justify-center mt-[12px]">
+                  <div className="flex justify-center mt-[20px]">
                     <button className={course.buttonStyle}>
                       Download Brochure
                     </button>
