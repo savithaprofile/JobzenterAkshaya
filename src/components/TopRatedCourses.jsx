@@ -1,7 +1,7 @@
 
-
 // export default TopRatedCourses;
 import React, { useState } from "react";
+import "./TopRatedCourses.css";
 
 const TopRatedCourses = () => {
   const [currentPage, setCurrentPage] = useState(0);
@@ -10,53 +10,93 @@ const TopRatedCourses = () => {
     {
       id: 1,
       title: "React Native Fullstack",
-      description: "React Native Fullstack development combines React Native for mobile apps with Node.js, Express, and a database (like MongoDB or PostgreSQL) on the backend.",
+      description:
+        "React Native Fullstack development combines React Native for mobile apps with Node.js, Express, and a database (like MongoDB or PostgreSQL) on the backend.",
       image: "/reactnative.png",
-      stars: ["/star1i120-ds8j.svg", "/star2i120-c1xf.svg", "/star3i120-xnzh.svg", "/star4i120-py9o.svg", "/star5i120-mwov.svg"],
-      buttonStyle: "h-[30px] w-[190px] px-[14px] rounded-[6px] bg-[#000000] text-[#FFFFFF] text-[12px] mt-[5px] ml-[20px]" 
+      stars: [
+        "/star1i120-ds8j.svg",
+        "/star2i120-c1xf.svg",
+        "/star3i120-xnzh.svg",
+        "/star4i120-py9o.svg",
+        "/star5i120-mwov.svg",
+      ],
+      buttonStyle: { marginTop: "5px" },
     },
     {
       id: 2,
       title: "Software Testing",
-      description: "Software Testing is the process of evaluating software to identify defects and ensure it meets the required quality standards.",
+      description:
+        "Software Testing is the process of evaluating software to identify defects and ensure it meets the required quality standards.",
       image: "/software-testing.png",
-      stars: ["/star1i120-8ujw.svg", "/star2i120-4u4.svg", "/star3i120-6vc.svg", "/star4i120-i28d.svg", "/star5i120-bani.svg"],
-      buttonStyle: "h-[30px] w-[190px] px-[14px] ml-[16px] rounded-[6px] bg-[#000000] text-[#FFFFFF] text-[12px] mt-[9px]"
+      stars: [
+        "/star1i120-8ujw.svg",
+        "/star2i120-4u4.svg",
+        "/star3i120-6vc.svg",
+        "/star4i120-i28d.svg",
+        "/star5i120-bani.svg",
+      ],
+      buttonStyle: { marginTop: "9px" },
     },
     {
       id: 3,
       title: "JAVA Fullstack Development",
-      description: "Java Full Stack Development is the process of building complete web applications using both frontend (JavaScript) and backend (Java, Spring Boot) technologies.",
+      description:
+        "Java Full Stack Development is the process of building complete web applications using both frontend (JavaScript) and backend (Java, Spring Boot) technologies.",
       image: "/fullstack development.png",
-      stars: ["/star1i120-x4ds.svg", "/star2i120-1k3.svg", "/star3i120-bhyj.svg", "/star4i120-b5u.svg", "/star5i120-eouq.svg"],
-      buttonStyle: "h-[30px] w-[190px] px-[14px] rounded-[6px] bg-[#000000] text-[#FFFFFF] text-[12px] mt-[-6px]",
-      buttonWrapper: true
+      stars: [
+        "/star1i120-x4ds.svg",
+        "/star2i120-1k3.svg",
+        "/star3i120-bhyj.svg",
+        "/star4i120-b5u.svg",
+        "/star5i120-eouq.svg",
+      ],
+      buttonStyle: { marginTop: "-6px" },
     },
     {
       id: 4,
       title: "Business Intelligence",
-      description: "Business Intelligence (BI) transforms raw data into meaningful insights to drive strategic business decisions. It helps organizations analyze trends, measure performance, and uncover growth opportunities.",
+      description:
+        "Business Intelligence (BI) transforms raw data into meaningful insights to drive strategic business decisions. It helps organizations analyze trends, measure performance, and uncover growth opportunities.",
       image: "/Business.png",
-      stars: ["/star1i120-ds8j.svg", "/star2i120-c1xf.svg", "/star3i120-xnzh.svg", "/star4i120-py9o.svg", "/star5i120-mwov.svg"],
-      buttonStyle: "h-[30px] w-[190px] px-[14px] rounded-[6px] bg-[#000000] text-[#FFFFFF] text-[12px] mt-[5px]"
+      stars: [
+        "/star1i120-ds8j.svg",
+        "/star2i120-c1xf.svg",
+        "/star3i120-xnzh.svg",
+        "/star4i120-py9o.svg",
+        "/star5i120-mwov.svg",
+      ],
+      buttonStyle: { marginTop: "5px" },
     },
     {
       id: 5,
       title: "MERN Stack Development",
-      description: "MERN Stack Development combines MongoDB, Express.js, React.js, and Node.js to build powerful full-stack web applications.",
+      description:
+        "MERN Stack Development combines MongoDB, Express.js, React.js, and Node.js to build powerful full-stack web applications.",
       image: "/MERN.png",
-      stars: ["/star1i120-8ujw.svg", "/star2i120-4u4.svg", "/star3i120-6vc.svg", "/star4i120-i28d.svg", "/star5i120-bani.svg"],
-      buttonStyle: "h-[30px] w-[190px] px-[14px] ml-[16px] rounded-[6px] bg-[#000000] text-[#FFFFFF] text-[12px] mt-[9px]"
+      stars: [
+        "/star1i120-8ujw.svg",
+        "/star2i120-4u4.svg",
+        "/star3i120-6vc.svg",
+        "/star4i120-i28d.svg",
+        "/star5i120-bani.svg",
+      ],
+      buttonStyle: { marginTop: "9px" },
     },
     {
       id: 6,
       title: "AWS",
-      description: "AWS is a secure cloud platform offering computing power, database storage, and content delivery services on demand.",
+      description:
+        "AWS is a secure cloud platform offering computing power, database storage, and content delivery services on demand.",
       image: "/AWS.png",
-      stars: ["/star1i120-x4ds.svg", "/star2i120-1k3.svg", "/star3i120-bhyj.svg", "/star4i120-b5u.svg", "/star5i120-eouq.svg"],
-      buttonStyle: "h-[30px] w-[190px] px-[14px] rounded-[6px] bg-[#000000] text-[#FFFFFF] text-[12px] mt-[-6px]",
-      buttonWrapper: true
-    }
+      stars: [
+        "/star1i120-x4ds.svg",
+        "/star2i120-1k3.svg",
+        "/star3i120-bhyj.svg",
+        "/star4i120-b5u.svg",
+        "/star5i120-eouq.svg",
+      ],
+      buttonStyle: { marginTop: "-6px" },
+    },
   ];
 
   const cardsPerPage = 3;
@@ -80,98 +120,82 @@ const TopRatedCourses = () => {
   const isLastPage = currentPage === totalPages - 1;
 
   return (
-    <section className="w-full flex justify-center py-[80px]">
-      <div 
-        className="relative w-[1400px] h-[718px] rounded-[91px] shadow-[0_8px_25px_rgba(0,0,0,0.15)] overflow-hidden"
-        style={{
-          background: 'linear-gradient(180deg, rgba(253, 240, 1, 0.45) 0%, #FFFFFF 100%)',
-        }}
-      >
-        {/* Header */}
-        <div className="px-[160px] pt-[36px]">
-          <h2 className="text-[32px] md:text-[32px] font-[800] leading-none text-black">
-            Top Rated Courses
-          </h2>
-          <p className="mt-2 max-w-[760px] text-[16px] py-[-10px] md:text-[16px] text-black/80">
+    <section className="top-rated-section d-flex justify-content-center">
+      <div className="top-rated-container position-relative">
+        <div className="top-rated-header">
+          <h2 className="top-rated-title">Top Rated Courses</h2>
+          <p className="top-rated-subtitle">
             Explore the most trusted and highly reviewed courses loved by learners.
           </p>
         </div>
 
-        {/* Cards Row */}
-        <div className="mt-[28px] px-[140px] flex gap-[90px] justify-center">
+        <div className="top-rated-cards d-flex justify-content-center">
           {visibleCourses.map((course) => (
-            <div key={course.id} className="course-card group relative w-[340px] h-[400px] rounded-[18px] bg-[#FFFFFF] shadow-[0_8px_24px_rgba(0,0,0,0.15)] overflow-hidden transition-all duration-300 ease-out">
-              {/* image */}
-              <div className="relative z-[2] h-[170px] flex items-start justify-center pt-[10px]">
-                <img src={course.image} alt={course.title} className="w-[280px] h-[200px] object-cover rounded-[14px]" />
+            <div key={course.id} className="course-card position-relative">
+              <div className="course-card-image d-flex align-items-start justify-content-center">
+                <img
+                  src={course.image}
+                  alt={course.title}
+                  className="course-card-thumbnail img-fluid"
+                />
               </div>
-              {/* content area */}
-              <div className="course-card-content relative px-[18px] pt-[28px] pb-[18px]">
-                <h3 className="text-[15px] font-[700] text-black">{course.title}</h3>
-                <p className="mt-[8px] text-[11px] leading-[16px] text-black/70">
-                  {course.description}
-                </p>
-                <div className="mt-[10px] flex items-center gap-[3px]">
+              <div className="course-card-content">
+                <h3 className="course-card-title">{course.title}</h3>
+                <p className="course-card-description">{course.description}</p>
+                <div className="course-card-stars d-flex align-items-center">
                   {course.stars.map((star, starIndex) => (
                     <img key={starIndex} src={star} alt="star" />
                   ))}
                 </div>
-                {course.buttonWrapper ? (
-                  <div className="flex justify-center mt-[20px]">
-                    <button className={course.buttonStyle}>
-                      Download Brochure
-                    </button>
-                  </div>
-                ) : (
-                  <button className={course.buttonStyle}>
+                <div className="course-card-button-wrapper d-flex justify-content-center">
+                  <button className="course-card-btn" style={course.buttonStyle}>
                     Download Brochure
                   </button>
-                )}
+                </div>
               </div>
             </div>
           ))}
         </div>
 
-        {/* Navigation Controls - Below cards, centered below middle card */}
-        <div className="flex items-center justify-center gap-[120px] mt-[40px]">
-          {/* Left Arrow */}
-          <button 
+        <div className="top-rated-controls d-flex align-items-center justify-content-center">
+          <button
             onClick={handlePrevious}
             disabled={isFirstPage}
-            aria-label="previous" 
-            className={`w-[60px] h-[60px]  rounded-full bg-[#000000] text-[#FFFFFF] grid place-items-center shadow transition-opacity ${
-              isFirstPage ? 'opacity-50 cursor-not-allowed' : 'hover:opacity-80 cursor-pointer'
-            }`}
+            aria-label="previous"
+            className="top-rated-control-btn"
           >
-            <img src="/left.png" alt="left" className="rotate-360deg" />
+            <img
+              src="/weuiarrowfilledi120-6nd.svg"
+              alt="left"
+              className="top-rated-control-icon top-rated-control-icon-left"
+            />
           </button>
 
-          {/* Dots */}
-          <div className="flex items-center gap-[10px]">
+          <div className="top-rated-dots d-flex align-items-center">
             {Array.from({ length: totalPages }).map((_, index) => (
-              <div
+              <button
                 key={index}
+                type="button"
                 onClick={() => setCurrentPage(index)}
-                className={`w-[12px] h-[12px] border-[3px] border-[#000000] rounded-full cursor-pointer transition-colors ${
-                  index === currentPage ? 'bg-[#FFC107]' : 'bg-gray-400'
-                }`}
+                className={`top-rated-dot ${index === currentPage ? "active" : ""}`}
+                aria-label={`Go to page ${index + 1}`}
               />
             ))}
           </div>
 
-          {/* Right Arrow */}
-          <button 
+          <button
             onClick={handleNext}
             disabled={isLastPage}
-            aria-label="next" 
-            className={`w-[60px] h-[60px] rounded-full bg-[#000000] text-[#FFFFFF] grid place-items-center shadow transition-opacity ${
-              isLastPage ? 'opacity-50 cursor-not-allowed' : 'hover:opacity-80 cursor-pointer'
-            }`}
+            aria-label="next"
+            className="top-rated-control-btn"
           >
-            <img src="/weuiarrowfilledi120-6nd.svg" alt="right" />
+            <img
+              src="/weuiarrowfilledi120-6nd.svg"
+              alt="right"
+              className="top-rated-control-icon"
+            />
           </button>
         </div>
-
       </div>
     </section>
   );

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { FaStar, FaThumbsUp, FaThumbsDown } from "react-icons/fa";
 import { IoChevronDown, IoChevronUp } from "react-icons/io5";
+import "./StudentReviews.css";
 
 const reviews = [
   {
@@ -42,7 +43,7 @@ const reviews = [
 ];
 
 const StudentReviews = () => {
-  const [index, setIndex] = useState(0); // tracks which pair is showing
+  const [index, setIndex] = useState(0);
 
   const nextReviews = () => {
     if (index + 2 < reviews.length) setIndex(index + 2);
@@ -53,101 +54,78 @@ const StudentReviews = () => {
   };
 
   return (
-    <section className="bg-white py-[80px] flex flex-col items-center">
-      {/* Section Header */}
-      <div className="text-center mb-[40px]">
-        <h2 className="text-[32px] font-[700] font-['Inter'] text-[#000000]">
-          What Our Students Says
-        </h2>
-        <p className="mt-[8px] text-[15px] text-[#000000]">
+    <section className="student-reviews-section d-flex flex-column align-items-center bg-white">
+      <div className="student-reviews-header text-center">
+        <h2 className="student-reviews-title">What Our Students Says</h2>
+        <p className="student-reviews-subtitle">
           Real stories from learners who transformed their careers with us.
         </p>
       </div>
 
-      {/* Up Arrow - above first review */}
       {index > 0 && (
         <button
           onClick={prevReviews}
-          className="mb-[-25px] w-[60px] z-10 h-[60px] bg-white border border-[#EAEAEA] rounded-full shadow-[0_3px_10px_rgba(0,0,0,0.15)] flex items-center justify-center hover:scale-105 transition-transform"
+          className="student-reviews-arrow student-reviews-arrow-up"
+          aria-label="Show previous reviews"
         >
-          <IoChevronUp className="text-[28px] text-black" />
+          <IoChevronUp />
         </button>
       )}
 
-      {/* Review Cards */}
-      <div className="flex flex-col items-center gap-[40px] transition-all duration-500 ease-in-out">
+      <div className="student-reviews-list d-flex flex-column align-items-center">
         {reviews.slice(index, index + 2).map((r, i) => (
-          <div
-            key={i}
-            className="relative w-[600px] min-h-[180px] bg-white border-r-[8px] border-b-[11px] border-[#FFF000] rounded-[10px] shadow-[0_4px_20px_rgba(0,0,0,0.08)] p-[28px]"
-          >
-            {/* Stars */}
-            <div className="flex gap-[3px] mb-[8px] text-[#FFC107] bg-white">
-              {Array(5)
-                .fill()
-                .map((_, j) => (
-                  <FaStar key={j} />
-                ))}
-            </div>
+          <div key={i} className="student-review-card">
+            <div className="student-review-surface ">
+              <div className="student-review-stars d-flex align-items-center">
+                {Array(5)
+                  .fill()
+                  .map((_, j) => (
+                    <FaStar key={j} />
+                  ))}
+              </div>
 
-            {/* Review Text */}
-            <p 
-              className="absolute bg-white text-[#000000E0] font-['Inter']"
-              style={{
-                width: '556.75px',
-                height: '96px',
-                top: '55.28px',
-                left: '82.5px',
-                fontFamily: 'Inter',
-                fontWeight: 400,
-                fontStyle: 'normal',
-                fontSize: '17px',
-                lineHeight: '24px',
-                letterSpacing: '-0.02em',
-              }}
-            >
-              {r.text}
-            </p>
+              <p className="student-review-text">{r.text}</p>
 
-            {/* Profile */}
-            <div className="flex gap-[7px] absolute bottom-[5px] left-[1px] -ml-[55px]">
-              <img
-                src={r.img}
-                alt={r.name}
-                className="w-[110px] h-[110px] rounded-full border-white shadow-[0_2px_6px_rgba(0,0,0,0.15)]"
-              />
-             <div className="bg-white">
-              <h4 className="text-[14px] font-[700] text-[#000000] bg-white py-[10px] px-[10px] mb-[10px]">
-                {r.name}
-              </h4>
-              <p className="text-[10px] text-[#555555] bg-white -mt-[14px] px-[10px] mb-[8px]">{r.role}</p>
-              
-              {/* Like and Dislike Buttons */}
-              <div className="flex gap-6 px-[19px]">
-                {/* Like Button - Yellow */}
-                <button className="w-[26px] h-[26px] rounded-full bg-[#FFF000] flex items-center justify-center hover:opacity-80 transition-opacity border-none">
-                  <FaThumbsUp className="text-[12px] text-black" />
-                </button>
-                {/* Dislike Button - Dark Gray */}
-                <button className="w-[26px] h-[26px] rounded-full bg-gray-700 flex items-center justify-center hover:opacity-80 transition-opacity border-none">
-                  <FaThumbsDown className="text-[12px] text-white" />
-                </button>
+              <div className="student-review-footer">
+                <img
+                  src={r.img}
+                  alt={r.name}
+                  className="student-review-avatar"
+                />
+
+                <div className="student-review-meta">
+                  <h4 className="student-review-name">{r.name}</h4>
+                  <p className="student-review-role">{r.role}</p>
+                  <div className="student-review-actions">
+                    <button
+                      type="button"
+                      className="student-review-action student-review-like"
+                      aria-label="Like review"
+                    >
+                      <FaThumbsUp />
+                    </button>
+                    <button
+                      type="button"
+                      className="student-review-action student-review-dislike"
+                      aria-label="Dislike review"
+                    >
+                      <FaThumbsDown />
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
-            </div>
-
-           
           </div>
         ))}
       </div>
 
-      {/* Down Arrow - below second review */}
       {index + 2 < reviews.length && (
         <button
           onClick={nextReviews}
-          className="mt-[-25px] w-[60px] h-[60px] bg-white border border-[#EAEAEA] rounded-full shadow-[0_3px_10px_rgba(0,0,0,0.15)] flex items-center justify-center hover:scale-105 transition-transform z-10"
+          className="student-reviews-arrow student-reviews-arrow-down"
+          aria-label="Show next reviews"
         >
-          <IoChevronDown className="text-[28px] text-black" />
+          <IoChevronDown />
         </button>
       )}
     </section>

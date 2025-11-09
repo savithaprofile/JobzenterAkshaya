@@ -1,10 +1,16 @@
 import { FaTwitter, FaFacebookF, FaInstagram } from "react-icons/fa";
 import { IoChevronDownSharp } from "react-icons/io5";
 import { Link, useLocation } from "react-router-dom";
-import React from "react";
+import React, { useState, useEffect } from "react";
+import "./Navbar.css";
 
 const Navbar = () => {
   const location = useLocation();
+  const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    setIsOpen(false);
+  }, [location.pathname]);
 
   const navItems = [
     { label: "Home", path: "/", hasDropdown: false },
@@ -15,65 +21,70 @@ const Navbar = () => {
     { label: "Tech Blogs", path: "/tech-blogs", hasDropdown: false },
   ];
 
+  const toggleMenu = () => {
+    setIsOpen((prev) => !prev);
+  };
+
   return (
-    <nav className="fixed top-0 left-0 w-full h-[89px] bg-[#FCF68A] z-50 opacity-100 shadow-sm">
-      <div className="max-w-[1400px] w-full mx-auto h-full flex items-center justify-between px-[60px]">
-        {/* Logo */}
-        <img
-          src="/logo1206-7vhj-200h.png"
-          alt="Jobzenter Logo"
-          className="w-[227px] h-[52px] object-contain"
-        />
+    <nav className="navbar navbar-expand-lg navbar-custom fixed-top shadow-sm">
+      <div className="container-fluid navbar-inner-container h-100">
+        <Link to="/" className="navbar-brand d-flex align-items-center">
+          <img
+            src="/logo1206-7vhj-200h.png"
+            alt="Jobzenter Logo"
+            className="img-fluid"
+            style={{ width: "227px", height: "52px", objectFit: "contain" }}
+          />
+        </Link>
 
-        {/* Navigation Links */}
-        <ul className="nav-links flex items-center gap-[40px] font-['Inter'] text-[16px] font-normal text-[#000000] leading-[100%] tracking-[0%]">
-        {navItems.map((item, index) => {
-          const isActive = location.pathname === item.path;
-          return (
-            <li
-              key={index}
-              className={`relative flex items-center justify-center min-w-[92px] h-[32px] text-center ${
-                item.label === "Career Lab" ? "min-w-[120px]" : ""
-              }`}
-            >
-              <Link
-                to={item.path}
-                className={`transition-colors duration-150 no-underline whitespace-nowrap ${
-                  isActive
-                    ? "font-medium text-[#000000] pb-1 border-b-2 border-black"
-                    : "text-[#000000]"
-                }`}
-              >
-                {item.label}
-              </Link>
-
-              {item.hasDropdown && (
-                <IoChevronDownSharp
-                  size={14}
-                  className="ml-[4px] mt-[2px] text-[#000000]"
-                />
-              )}
-
-              {/* underline handled via border on active link (Home) */}
-            </li>
-          );
-        })}
-      </ul>
-
-        {/* Right Side Icons */}
-        <div
-          className="flex items-center justify-end"
-          style={{
-            width: "135.999px",
-            height: "24px",
-            gap: "40px",
-            top: "32px",
-            left: "1212px",
-          }}
+        <button
+          className={`navbar-toggler navbar-toggler-custom ${isOpen ? "collapsed" : ""}`}
+          type="button"
+          aria-controls="navbarSupportedContent"
+          aria-expanded={isOpen}
+          aria-label="Toggle navigation"
+          onClick={toggleMenu}
         >
-        <FaTwitter className="w-[24px] h-[24px] text-[#1DA1F2] hover:scale-110 transition-transform" />
-        <FaFacebookF className="w-[24px] h-[24px] text-[#1877F2] hover:scale-110 transition-transform" />
-        <FaInstagram className="w-[24px] h-[24px] text-[#E4405F] hover:scale-110 transition-transform" />
+          <span className="navbar-toggler-line" />
+          <span className="navbar-toggler-line" />
+          <span className="navbar-toggler-line" />
+        </button>
+
+        <div
+          className={`collapse navbar-collapse justify-content-end ${isOpen ? "show" : ""}`}
+          id="navbarSupportedContent"
+        >
+          <ul className="navbar-nav nav-links mb-3 mb-lg-0">
+            {navItems.map((item) => {
+              const isActive = location.pathname === item.path;
+              return (
+                <li
+                  key={item.path}
+                  className={`nav-item d-flex align-items-center ${
+                    item.label === "Career Lab" ? "career-lab" : ""
+                  }`}
+                >
+                  <Link
+                    to={item.path}
+                    className={`nav-link text-dark ${
+                      isActive ? "active nav-link-active" : ""
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
+                  {item.hasDropdown && (
+                    <IoChevronDownSharp size={14} className="ms-1 mt-1 text-dark" />
+                  )}
+                </li>
+              );
+            })}
+          </ul>
+
+          <div className="social-icons ms-lg-4">
+            <FaTwitter className="social-icon" style={{ color: "#1DA1F2" }} />
+            <FaFacebookF className="social-icon" style={{ color: "#1877F2" }} />
+            <FaInstagram className="social-icon" style={{ color: "#E4405F" }} />
+          </div>
         </div>
       </div>
     </nav>

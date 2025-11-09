@@ -1,11 +1,12 @@
 
 // export default Footer;
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { ArrowRight, ChevronRight } from 'lucide-react';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { ArrowRight, ChevronRight } from "lucide-react";
+import "./Footer.css";
 
 const Footer = () => {
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState("");
 
   const courses = [
     "AWS",
@@ -34,220 +35,97 @@ const Footer = () => {
   const handleSubscribe = (e) => {
     e.preventDefault();
     if (email.trim()) {
-      console.log('Subscribing email:', email);
-      setEmail('');
+      console.log("Subscribing email:", email);
+      setEmail("");
     }
   };
 
   return (
-    <footer className="bg-black text-[14px] text-white py-12 w-full" style={{ backgroundColor: '#000000' }}>
-      <div className="container mx-auto px-9">
-        {/* Top Section - 4 Columns */}
-        <div className="flex flex-wrap gap-4 justify-between">
-          {/* Courses Column */}
-          <div className="flex-1 text-[#FFFFFF] min-w-[180px]">
-            <h3 
-              className="mb-6 mt-12 ml-[45px] text-[#FFFFFF]"
-              style={{
-                fontFamily: 'Inter',
-                fontWeight: 600,
-                fontSize: '16px',
-                lineHeight: '100%',
-                letterSpacing: '0%',
-                textDecoration: 'underline',
-                textDecorationStyle: 'solid',
-              }}
-            >
-              Courses
-            </h3>
-            <ul className="space-y-4">
-  {courses.map((course, index) => (
-    <li
-      key={index}
-      className="flex items-center group cursor-pointer ml-4 mb-6"
-    >
-      <ChevronRight className="w-4 h-4 mr-2 text-white transition-transform group-hover:translate-x-1" />
-      <span className="text-white group-hover:text-yellow-400 transition-colors">
-        {course}
-      </span>
-    </li>
-  ))}
-          </ul>
+    <footer className="footer">
+      <div className="container-fluid footer-container">
+        <div className="row footer-top g-4">
+          <div className="col-lg-2 col-md-4 footer-column">
+            <h3 className="footer-title">Courses</h3>
+            <ul className="list-unstyled footer-list">
+              {courses.map((course, index) => (
+                <li key={index} className="footer-list-item">
+                  <ChevronRight className="footer-list-icon" />
+                  <span>{course}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-        </div>
-
-          {/* Quick Links Column */}
-          <div className="flex-1 text-[#FFFFFF] min-w-[280px]">
-            <h3 
-              className="-mb-9 mt-6 ml-[45px] text-[#FFFFFF]"
-              style={{
-                fontFamily: 'Inter',
-                fontWeight: 600,
-                fontSize: '16px',
-                lineHeight: '100%',
-                letterSpacing: '0%',
-                textDecoration: 'underline',
-                textDecorationStyle: 'solid',
-              }}
-            >
-              Quick Links
-            </h3>
-            <ul>
+          <div className="col-lg-2 col-md-4 footer-column">
+            <h3 className="footer-title">Quick Links</h3>
+            <ul className="list-unstyled footer-list">
               {quickLinks.map((link, index) => (
-                <li key={index} className="flex items-center  group cursor-pointer mb-6">
-                  <ChevronRight className="w-4 h-4 mr-2 text-white transition-transform group-hover:translate-x-1" />
-                  <span className="text-white group-hover:text-yellow-400 transition-colors">{link}</span>
+                <li key={index} className="footer-list-item">
+                  <ChevronRight className="footer-list-icon" />
+                  <span>{link}</span>
                 </li>
               ))}
-          </ul>
-        </div>
+            </ul>
+          </div>
 
-          {/* Services Links Column */}
-          <div className="flex-1 min-w-[280px] text-[#FFFFFF]">
-            <h3 
-              className="mb-6 ml-[45px] text-[#FFFFFF]"
-              style={{
-                fontFamily: 'Inter',
-                fontWeight: 600,
-                fontSize: '16px',
-                lineHeight: '100%',
-                letterSpacing: '0%',
-                textDecoration: 'underline',
-                textDecorationStyle: 'solid',
-              }}
-            >
-              Services Links
-            </h3>
-            <ul>
+          <div className="col-lg-2 col-md-4 footer-column">
+            <h3 className="footer-title">Services Links</h3>
+            <ul className="list-unstyled footer-list">
               {servicesLinks.map((service, index) => (
-                <li key={index} className="flex items-center group cursor-pointer mb-6">
-                  <ChevronRight className="w-4 h-4 mr-2 text-white transition-transform group-hover:translate-x-1" />
-                  <span className="text-white group-hover:text-yellow-400  transition-colors">{service}</span>
+                <li key={index} className="footer-list-item">
+                  <ChevronRight className="footer-list-icon" />
+                  <span>{service}</span>
                 </li>
               ))}
-          </ul>
+            </ul>
+          </div>
+
+          <div className="col-lg-6 footer-subscribe-wrapper">
+            <div className="footer-subscribe">
+              <h3 className="footer-subscribe-title">Subscribe</h3>
+              <form onSubmit={handleSubscribe} className="footer-subscribe-form">
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Enter Your Email"
+                  className="footer-subscribe-input"
+                  required
+                />
+                <button type="submit" className="footer-subscribe-button">
+                  <ArrowRight className="footer-subscribe-icon" />
+                </button>
+              </form>
+              <h4 className="footer-subscribe-heading">
+                Stay in the loop with our newsletter!
+              </h4>
+              <p className="footer-subscribe-text">
+                Subscribe to our newsletter and unlock a world of exclusive
+                benefits. Be the first to know about our latest products, special
+                promotions, and exciting updates. Join our community of like-minded
+                individuals who share a passion for [your niche/industry].
+              </p>
+            </div>
+          </div>
         </div>
 
-        {/* Subscribe Section */}
-          <div
-            className="relative bg-[#FDF001] text-black rounded-lg"
-            style={{ width: '642px', height: '332px', right: '60px' }}
-          >
-            <h3 className="text-[17px] font-bold mb-7 ml-[20px] pt-[20px]">Subscribe</h3>
-            <form onSubmit={handleSubscribe} className="relative">
-            <input
-              type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter Your Email"
-                className="text-black focus:outline-none"
-                style={{
-                  width: '402.5555419921875px',
-                  height: '50px',
-                  top: '15px',
-                  left: '20px',
-                  position: 'absolute',
-                  borderWidth: '0px',
-                  borderStyle: 'solid',
-                  borderColor: '#D6D6D6',
-                  padding: '0 16px',
-                  borderRadius: '6px',
-                }}
-              />
-              <button
-                type="submit"
-                className="bg-[#FDBE0A] hover:bg-[#FFC107] text-white px-6 py-2 rounded-r-md absolute border-none"
-                style={{
-                  top: '15px',
-                  left: '422.56px',
-                  height: '50px',
-                  width: '50px',
-                }}
-              >
-                <ArrowRight className="h-5 w-5" />
-            </button>
-            </form>
-            <h4 className="absolute font-bold mb-2 ml-[20px]  opacity: 0.6, fontFamily: 'Inter', fontSize: '16px', top-[140px]">Stay in the loop with our newsletter!</h4>
-            <p 
-              className="text-black"
-              style={{
-                width: '602px',
-                height: '151px',
-                top: '199px',
-                left: '20px',
-                position: 'absolute',
-                opacity: 0.6,
-                fontFamily: 'Inter',
-                fontWeight: 300,
-                fontSize: '14px',
-                lineHeight: '30px',
-                letterSpacing: '0%',
-              }}
-            >
-              Subscribe to our newsletter and unlock a world of exclusive benefits. Be the first to
-              know about our latest products, special promotions, and exciting updates. Join our
-              community of like-minded individuals who share a passion for [your niche/industry].
-          </p>
+        <div className="footer-bottom d-flex flex-column flex-lg-row align-items-center justify-content-between">
+          <p className="footer-copy mb-3 mb-lg-0">© 2026 All Rights Reserved</p>
+          <div className="footer-social d-flex align-items-center">
+            <Link to="#" className="footer-social-link" aria-label="Facebook">
+              <img src="/facebook.png" alt="Facebook" />
+            </Link>
+            <Link to="#" className="footer-social-link" aria-label="Twitter">
+              <img src="/twitter.png" alt="Twitter" />
+            </Link>
+            <Link to="#" className="footer-social-link" aria-label="Instagram">
+              <img src="/instagram.png" alt="Instagram" />
+            </Link>
+            <Link to="#" className="footer-social-link" aria-label="YouTube">
+              <img src="/youtube.png" alt="YouTube" />
+            </Link>
+          </div>
         </div>
-      </div>
-
-
-{/* 
-<div className="relative w-full px-6 py-9 flex items-center justify-center"> */}
-  
-  {/* Centered Copyright */}
-  {/* <p className="text-sm text-[#D9D9D9] text-center w-full">
-    © 2026 All Rights Reserved
-  </p> */}
-
-  {/* Right-Aligned Social Icons */}
-  {/* <div className="relative right-6 flex gap-3">
-    <Link to="#" aria-label="Facebook" className="w-[38px] h-[38px] rounded-full bg-[#1E1E1E] hover:bg-[#2A2A2A] flex items-center justify-center transition-colors duration-200">
-      <Facebook className="w-[18px] h-[18px] text-white" />
-    </Link>
-    <Link to="#" aria-label="Twitter" className="w-[38px] h-[38px] rounded-full bg-[#1E1E1E] hover:bg-[#2A2A2A] flex items-center justify-center transition-colors duration-200">
-      <Twitter className="w-[18px] h-[18px] text-white" />
-    </Link>
-    <Link to="#" aria-label="Instagram" className="w-[38px] h-[38px] rounded-full bg-[#1E1E1E] hover:bg-[#2A2A2A] flex items-center justify-center transition-colors duration-200">
-      <Instagram className="w-[18px] h-[18px] text-white" />
-    </Link>
-    <Link to="#" aria-label="YouTube" className="w-[38px] h-[38px] rounded-full bg-[#1E1E1E] hover:bg-[#2A2A2A] flex items-center justify-center transition-colors duration-200">
-      <Youtube className="w-[18px] h-[18px] text-white" />
-    </Link>
-  </div>
-</div> */}
-
-<div className="relative w-[1450px] px-8 py-8  flex items-center justify-center">
-  {/* Centered Copyright */}
-  <p className="text-sm text-[#D9D9D9] text-center w-full mt-2">
-    © 2026 All Rights Reserved
-  </p>
-
-  {/* Right-Aligned Social Icons with spacing */}
-  <div className="relative right-6 flex gap-4 mt-4 mb-4 gap-[15px] ">
-    <Link to="#" className="w-[38px] h-[38px] rounded-full bg-[#1E1E1E] hover:bg-[#2A2A2A] flex items-center justify-center transition-colors duration-200">
-      <img src="/facebook.png" alt="Facebook" className="w-[18px] h-[18px]" />
-          </Link>
-    <Link to="#" className="w-[38px] h-[38px] rounded-full bg-[#1E1E1E] hover:bg-[#2A2A2A] flex items-center justify-center transition-colors duration-200">
-      <img src="/twitter.png" alt="Twitter" className="w-[18px] h-[18px]" />
-          </Link>
-    <Link to="#" className="w-[38px] h-[38px] rounded-full bg-[#1E1E1E] hover:bg-[#2A2A2A] flex items-center justify-center transition-colors duration-200">
-      <img src="/instagram.png" alt="Instagram" className="w-[18px] h-[18px]" />
-          </Link>
-    <Link to="#" className="w-[38px] h-[38px] rounded-full bg-[#1E1E1E] hover:bg-[#2A2A2A] flex items-center justify-center transition-colors duration-200 ml-[-1px]">
-      <img src="/youtube.png" alt="YouTube" className="w-[18px] h-[18px]"  />
-          </Link>
-        </div>
-</div>
-
-
-
-
-
-
-
-
-
       </div>
     </footer>
   );
