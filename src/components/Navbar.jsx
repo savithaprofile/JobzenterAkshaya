@@ -1,23 +1,27 @@
 import { FaTwitter, FaFacebookF, FaInstagram } from "react-icons/fa";
 import { IoChevronDownSharp } from "react-icons/io5";
-import { Link, useLocation } from "react-router-dom";
-import React, { useState, useEffect } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import React, { useState, useEffect, useRef } from "react";
 import "./Navbar.css";
 
 const Navbar = () => {
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
 
-  useEffect(() => {
-    setIsOpen(false);
-  }, [location.pathname]);
-
   const navItems = [
     { label: "Home", path: "/", hasDropdown: false },
     { label: "Courses", path: "/courses", hasDropdown: false },
-    { label: "Services", path: "/services", hasDropdown: true },
     { label: "Reach Us", path: "/reach-us", hasDropdown: false },
-    { label: "Career Lab", path: "/career-lab", hasDropdown: true },
+    {
+      label: "Career Lab",
+      path: "/career-lab",
+      hasDropdown: true,
+      dropdownItems: [
+        { label: "Interview Preparation", path: "/career-lab/interview-preparation" },
+        { label: "Resume Building", path: "/career-lab/resume-building" },
+        { label: "Bootcamps", path: "/career-lab/bootcamps" },
+      ],
+    },
     { label: "Tech Blogs", path: "/tech-blogs", hasDropdown: false },
   ];
 
@@ -25,8 +29,88 @@ const Navbar = () => {
     setIsOpen((prev) => !prev);
   };
 
+  const navbarRef = useRef(null);
+  const [openDropdown, setOpenDropdown] = useState(null);
+  const [isDesktop, setIsDesktop] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    setIsOpen(false);
+    setOpenDropdown(null);
+  }, [location.pathname]);
+
+  useEffect(() => {
+    const updateBodyPadding = () => {
+      if (!navbarRef.current) return;
+      const computedStyle = window.getComputedStyle(navbarRef.current);
+      const isFixed = computedStyle.position === "fixed";
+      const navHeight = navbarRef.current.offsetHeight;
+      document.body.style.paddingTop = isFixed ? `${navHeight}px` : "";
+    };
+
+    updateBodyPadding();
+    window.addEventListener("resize", updateBodyPadding);
+    return () => {
+      window.removeEventListener("resize", updateBodyPadding);
+      document.body.style.paddingTop = "";
+    };
+  }, []);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsDesktop(window.innerWidth >= 992);
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  useEffect(() => {
+    if (!navbarRef.current) return;
+    const computedStyle = window.getComputedStyle(navbarRef.current);
+    const isFixed = computedStyle.position === "fixed";
+    const navHeight = navbarRef.current.offsetHeight;
+    document.body.style.paddingTop = isFixed ? `${navHeight}px` : "";
+  }, [isOpen]);
+
+  useEffect(() => {
+    if (!isOpen) {
+      setOpenDropdown(null);
+    }
+  }, [isOpen]);
+
+  const handleDropdownToggle = (label) => {
+    setOpenDropdown((prev) => (prev === label ? null : label));
+  };
+
+  const handleDropdownOpen = (label) => {
+    if (isDesktop) {
+      setOpenDropdown(label);
+    }
+  };
+
+  const handleDropdownClose = () => {
+    if (isDesktop) {
+      setOpenDropdown(null);
+    }
+  };
+
+  const handleNavLinkClick = (event, item) => {
+    if (item.hasDropdown && !isDesktop && openDropdown !== item.label) {
+      event.preventDefault();
+      setOpenDropdown(item.label);
+    }
+  };
+
+  const handleDropdownNavigation = (path) => {
+    navigate(path);
+    setOpenDropdown(null);
+    setIsOpen(false);
+  };
+
   return (
-    <nav className="navbar navbar-expand-lg navbar-custom fixed-top shadow-sm">
+    <nav ref={navbarRef} className="navbar navbar-expand-lg navbar-custom fixed-top shadow-sm">
       <div className="container-fluid navbar-inner-container h-100">
         <Link to="/" className="navbar-brand d-flex align-items-center">
           <img
@@ -57,23 +141,87 @@ const Navbar = () => {
           <ul className="navbar-nav nav-links mb-3 mb-lg-0">
             {navItems.map((item) => {
               const isActive = location.pathname === item.path;
+              const isDropdownOpen = openDropdown === item.label;
               return (
                 <li
                   key={item.path}
-                  className={`nav-item d-flex align-items-center ${
+                  className={`nav-item d-flex align-items-center ${item.hasDropdown ? "has-dropdown" : ""} ${
                     item.label === "Career Lab" ? "career-lab" : ""
-                  }`}
+                  } ${isDropdownOpen ? "dropdown-open" : ""}`}
+                  onMouseEnter={() => item.hasDropdown && handleDropdownOpen(item.label)}
+                  onMouseLeave={() => item.hasDropdown && handleDropdownClose()}
                 >
-                  <Link
-                    to={item.path}
-                    className={`nav-link text-dark ${
-                      isActive ? "active nav-link-active" : ""
-                    }`}
-                  >
-                    {item.label}
-                  </Link>
-                  {item.hasDropdown && (
-                    <IoChevronDownSharp size={14} className="ms-1 mt-1 text-dark" />
+                  <div className="nav-link-wrapper">
+                    <Link
+                      to={item.path}
+                      className={`nav-link text-dark ${isActive ? "active nav-link-active" : ""}`}
+                      onClick={(event) => handleNavLinkClick(event, item)}
+                    >
+                      {item.label}
+                    </Link>
+                    {item.hasDropdown && (
+                      <button
+                        type="button"
+                        className="dropdown-toggle-button"
+                        aria-expanded={isDropdownOpen}
+                        aria-haspopup="true"
+                        aria-label={`${item.label} menu`}
+                        onClick={() => handleDropdownToggle(item.label)}
+                      >
+                        <IoChevronDownSharp
+                          size={14}
+                          className={`dropdown-icon text-dark ${isDropdownOpen ? "open" : ""}`}
+                        />
+                      </button>
+                    )}
+                  </div>
+                  {item.hasDropdown && item.dropdownItems && (
+                    <>
+                      {isDesktop ? (
+                        <ul className={`dropdown-menu-custom ${isDropdownOpen ? "show" : ""}`}>
+                          {item.dropdownItems.map((dropdownItem) => {
+                            const isDropdownActive = location.pathname === dropdownItem.path;
+                            return (
+                              <li key={dropdownItem.path}>
+                                <Link
+                                  to={dropdownItem.path}
+                                  className={`dropdown-item-custom ${isDropdownActive ? "active" : ""}`}
+                                  onClick={() => setOpenDropdown(null)}
+                                >
+                                  {dropdownItem.label}
+                                </Link>
+                              </li>
+                            );
+                          })}
+                        </ul>
+                      ) : (
+                        <>
+                          <div
+                            className={`mobile-dropdown-overlay ${isDropdownOpen ? "show" : ""}`}
+                            onClick={() => {
+                              setOpenDropdown(null);
+                            }}
+                          />
+                          <div className={`mobile-dropdown-panel ${isDropdownOpen ? "show" : ""}`}>
+                            <div className="mobile-dropdown-body">
+                              {item.dropdownItems.map((dropdownItem) => {
+                                const isDropdownActive = location.pathname === dropdownItem.path;
+                                return (
+                                  <button
+                                    key={dropdownItem.path}
+                                    type="button"
+                                    className={`mobile-dropdown-item ${isDropdownActive ? "active" : ""}`}
+                                    onClick={() => handleDropdownNavigation(dropdownItem.path)}
+                                  >
+                                    {dropdownItem.label}
+                                  </button>
+                                );
+                              })}
+                            </div>
+                          </div>
+                        </>
+                      )}
+                    </>
                   )}
                 </li>
               );
@@ -81,9 +229,33 @@ const Navbar = () => {
           </ul>
 
           <div className="social-icons ms-lg-4">
-            <FaTwitter className="social-icon" style={{ color: "#1DA1F2" }} />
-            <FaFacebookF className="social-icon" style={{ color: "#1877F2" }} />
-            <FaInstagram className="social-icon" style={{ color: "#E4405F" }} />
+            <Link
+              to="https://twitter.com/jobzenter"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Follow Jobzenter on Twitter"
+              className="social-icon-button"
+            >
+              <FaTwitter className="social-icon" style={{ color: "#1DA1F2" }} />
+            </Link>
+            <Link
+              to="https://facebook.com/jobzenter"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Follow Jobzenter on Facebook"
+              className="social-icon-button"
+            >
+              <FaFacebookF className="social-icon" style={{ color: "#1877F2" }} />
+            </Link>
+            <Link
+              to="https://www.instagram.com/jobzenter_official?igsh=dWVwdGs1bWM4ZnBp"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Follow Jobzenter on Instagram"
+              className="social-icon-button"
+            >
+              <FaInstagram className="social-icon" style={{ color: "#E4405F" }} />
+            </Link>
           </div>
         </div>
       </div>

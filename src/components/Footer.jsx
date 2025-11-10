@@ -1,129 +1,171 @@
 
-// export default Footer;
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, ChevronRight } from "lucide-react";
+import { Mail, Phone, MapPin } from "lucide-react";
+import {
+  FaLinkedinIn,
+  FaFacebookF,
+  FaInstagram,
+  FaYoutube,
+  FaWhatsapp,
+} from "react-icons/fa";
 import "./Footer.css";
 
 const Footer = () => {
-  const [email, setEmail] = useState("");
+  const socialLinks = [
+    {
+      label: "LinkedIn",
+      to: "https://www.linkedin.com/company/jobzenter",
+      icon: FaLinkedinIn,
+    },
+    {
+      label: "Facebook",
+      to: "https://facebook.com/jobzenter",
+      icon: FaFacebookF,
+    },
+    {
+      label: "Instagram",
+      to: "https://www.instagram.com/jobzenter_official?igsh=dWVwdGs1bWM4ZnBp",
+      icon: FaInstagram,
+    },
+    {
+      label: "YouTube",
+      to: "https://youtube.com/@jobzenter",
+      icon: FaYoutube,
+    },
+    {
+      label: "WhatsApp",
+      to: "https://wa.me/919000000000",
+      icon: FaWhatsapp,
+    },
+  ];
 
   const courses = [
-    "AWS",
-    "Software Testing",
-    "Fullstack Development",
-    "Business Intelligence",
-    "CCNA",
-    "Medical Billing",
+    { label: "AWS", to: "/courses/aws" },
+    { label: "Software Testing", to: "/courses/software-testing" },
+    { label: "Fullstack Development", to: "/courses/fullstack-development" },
+    { label: "Business Intelligence", to: "/courses/business-intelligence" },
+    { label: "CCNA", to: "/courses/ccna" },
+    { label: "Medical Billing", to: "/courses/medical-billing" },
   ];
 
   const quickLinks = [
-    "Terms and Conditions",
-    "Privacy Policy",
-    "Disclaimer",
-    "Courses We Offer",
+    { label: "Terms and Conditions", to: "/terms" },
+    { label: "Privacy Policy", to: "/privacy-policy" },
+    { label: "Disclaimer", to: "/disclaimer" },
+    { label: "Courses We Offer", to: "/courses" },
   ];
 
   const servicesLinks = [
-    "Resume Building",
-    "Interview Preparation",
-    "Job Portal Access",
-    "Career Counseling",
-    "Bootcamps",
+    { label: "Bootcamps", to: "/services/bootcamps" },
+    { label: "Resume Building", to: "/services/resume-building" },
+    { label: "Interview Preparation", to: "/services/interview-preparation" },
   ];
 
-  const handleSubscribe = (e) => {
-    e.preventDefault();
-    if (email.trim()) {
-      console.log("Subscribing email:", email);
-      setEmail("");
-    }
-  };
+  const contactDetails = [
+    {
+      icon: Mail,
+      label: "support@jobzenter.com",
+      to: "mailto:support@jobzenter.com",
+    },
+    {
+      icon: Phone,
+      label: "+91 90000 00000",
+      to: "tel:+919000000000",
+    },
+    {
+      icon: MapPin,
+      label: "Chennai, Tamil Nadu",
+      to: "/reach-us",
+    },
+  ];
 
   return (
     <footer className="footer">
       <div className="container-fluid footer-container">
-        <div className="row footer-top g-4">
-          <div className="col-lg-2 col-md-4 footer-column">
-            <h3 className="footer-title">Courses</h3>
-            <ul className="list-unstyled footer-list">
-              {courses.map((course, index) => (
-                <li key={index} className="footer-list-item">
-                  <ChevronRight className="footer-list-icon" />
-                  <span>{course}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+        <div className="footer-surface">
+          <div className="footer-grid">
+            <div className="footer-brand">
+              <img
+                src="/logo1206-7vhj-200h.png"
+                alt="Jobzenter Logo"
+                className="footer-logo"
+              />
+              <p className="footer-social-title">Social Media</p>
+              <div className="footer-social">
+                {socialLinks.map(({ label, to, icon: Icon }) => (
+                  <Link
+                    key={label}
+                    to={to}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={label}
+                    className="footer-social-pill"
+                  >
+                    <Icon size={16} />
+                  </Link>
+                ))}
+              </div>
+            </div>
 
-          <div className="col-lg-2 col-md-4 footer-column">
-            <h3 className="footer-title">Quick Links</h3>
-            <ul className="list-unstyled footer-list">
-              {quickLinks.map((link, index) => (
-                <li key={index} className="footer-list-item">
-                  <ChevronRight className="footer-list-icon" />
-                  <span>{link}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+            <div className="footer-column">
+              <h4 className="footer-heading">Quick Links</h4>
+              <ul className="footer-list">
+                {quickLinks.map(({ label, to }) => (
+                  <li key={label}>
+                    <Link to={to} className="footer-link">
+                      {label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-          <div className="col-lg-2 col-md-4 footer-column">
-            <h3 className="footer-title">Services Links</h3>
-            <ul className="list-unstyled footer-list">
-              {servicesLinks.map((service, index) => (
-                <li key={index} className="footer-list-item">
-                  <ChevronRight className="footer-list-icon" />
-                  <span>{service}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+            <div className="footer-column">
+              <h4 className="footer-heading">Courses</h4>
+              <ul className="footer-list">
+                {courses.map(({ label, to }) => (
+                  <li key={label}>
+                    <Link to={to} className="footer-link">
+                      {label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-          <div className="col-lg-6 footer-subscribe-wrapper">
-            <div className="footer-subscribe">
-              <h3 className="footer-subscribe-title">Subscribe</h3>
-              <form onSubmit={handleSubscribe} className="footer-subscribe-form">
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Enter Your Email"
-                  className="footer-subscribe-input"
-                  required
-                />
-                <button type="submit" className="footer-subscribe-button">
-                  <ArrowRight className="footer-subscribe-icon" />
-                </button>
-              </form>
-              <h4 className="footer-subscribe-heading">
-                Stay in the loop with our newsletter!
-              </h4>
-              <p className="footer-subscribe-text">
-                Subscribe to our newsletter and unlock a world of exclusive
-                benefits. Be the first to know about our latest products, special
-                promotions, and exciting updates. Join our community of like-minded
-                individuals who share a passion for [your niche/industry].
-              </p>
+            <div className="footer-column">
+              <h4 className="footer-heading">Services Links</h4>
+              <ul className="footer-list">
+                {servicesLinks.map(({ label, to }) => (
+                  <li key={label}>
+                    <Link to={to} className="footer-link">
+                      {label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="footer-column">
+              <h4 className="footer-heading">Contact With Us</h4>
+              <ul className="footer-contact-list">
+                {contactDetails.map(({ icon: Icon, label, to }) => (
+                  <li key={label}>
+                    <Icon size={18} className="footer-contact-icon" />
+                    <Link to={to} className="footer-contact-link">
+                      {label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
-        </div>
 
-        <div className="footer-bottom d-flex flex-column flex-lg-row align-items-center justify-content-between">
-          <p className="footer-copy mb-3 mb-lg-0">© 2026 All Rights Reserved</p>
-          <div className="footer-social d-flex align-items-center">
-            <Link to="#" className="footer-social-link" aria-label="Facebook">
-              <img src="/facebook.png" alt="Facebook" />
-            </Link>
-            <Link to="#" className="footer-social-link" aria-label="Twitter">
-              <img src="/twitter.png" alt="Twitter" />
-            </Link>
-            <Link to="#" className="footer-social-link" aria-label="Instagram">
-              <img src="/instagram.png" alt="Instagram" />
-            </Link>
-            <Link to="#" className="footer-social-link" aria-label="YouTube">
-              <img src="/youtube.png" alt="YouTube" />
-            </Link>
+          <div className="footer-divider" />
+
+          <div className="footer-bottom">
+            <p className="footer-copy">Copyright © 2025 Jobzenter. All rights reserved.</p>
           </div>
         </div>
       </div>

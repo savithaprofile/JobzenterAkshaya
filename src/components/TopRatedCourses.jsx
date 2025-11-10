@@ -65,7 +65,7 @@ const TopRatedCourses = () => {
         "/star4i120-py9o.svg",
         "/star5i120-mwov.svg",
       ],
-      buttonStyle: { marginTop: "5px" },
+      buttonStyle: { marginTop: "-5px" },
     },
     {
       id: 5,

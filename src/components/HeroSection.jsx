@@ -42,17 +42,17 @@ const HeroSection = () => {
 
           <div className="col-xl-6 col-lg-6 hero-visual-wrapper">
             <div className="hero-visual position-relative">
-              <img src="/Rocket.png" alt="Rocket" className="hero-rocket" />
+             
               <div className="hero-figure">
-                <img src="/Group.png" alt="Happy Woman" className="hero-figure-image" />
+                <img src="/Girl.png" alt="Happy Woman" className="hero-figure-image" />
               </div>
               <div className="hero-ellipse hero-ellipse-top">
                 <img src="/black.png" alt="Black Outer Ring" className="hero-ellipse-outer" />
-                <img src="/yellow.png" alt="Yellow Inner Circle" className="hero-ellipse-inner" />
+                <img src="/circle.png" alt="Yellow Inner Circle" className="hero-ellipse-inner" />
               </div>
               <div className="hero-ellipse hero-ellipse-bottom">
                 <img src="/black.png" alt="Black Outer Ring" className="hero-ellipse-outer" />
-                <img src="/yellow.png" alt="Yellow Inner Circle" className="hero-ellipse-inner" />
+                <img src="/circle.png" alt="Yellow Inner Circle" className="hero-ellipse-inner" />
               </div>
             </div>
           </div>

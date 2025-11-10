@@ -66,23 +66,20 @@ body {
   transform: translateY(-50%);
   width: 110px;
   height: 240px;
-  background: rgba(253, 240, 1, 0.35);
-;
-;
-  /* border-radius: 90px 0 0 90px; */
-   border-radius: 0 90px 90px 0;
+  background: #FDF00159;
+  border-radius: 0 90px 90px 0;
   transition: all 0.4s cubic-bezier(.4,0,.2,1);
   z-index: 1;
   opacity: 0.7;
   pointer-events: none;
 }
-.course-card:hover::before,
-/* On hover, do not change the semicircle. Keep it fixed. */
+.course-card:hover::before {
+  background: #FFFFFFAD;
+}
 
 .course-card:hover,
 .course-card.group:hover {
   background: #FDF00159;
-
 }
 .course-card-content {
   position: relative;
