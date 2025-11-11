@@ -33,6 +33,7 @@ const Navbar = () => {
   const [openDropdown, setOpenDropdown] = useState(null);
   const [isDesktop, setIsDesktop] = useState(false);
   const navigate = useNavigate();
+  const closeDropdownTimer = useRef(null);
 
   useEffect(() => {
     setIsOpen(false);
@@ -80,20 +81,42 @@ const Navbar = () => {
     }
   }, [isOpen]);
 
+  useEffect(() => {
+    return () => {
+      if (closeDropdownTimer.current) {
+        clearTimeout(closeDropdownTimer.current);
+      }
+    };
+  }, []);
+
   const handleDropdownToggle = (label) => {
+    if (closeDropdownTimer.current) {
+      clearTimeout(closeDropdownTimer.current);
+      closeDropdownTimer.current = null;
+    }
     setOpenDropdown((prev) => (prev === label ? null : label));
   };
 
   const handleDropdownOpen = (label) => {
+    if (closeDropdownTimer.current) {
+      clearTimeout(closeDropdownTimer.current);
+      closeDropdownTimer.current = null;
+    }
     if (isDesktop) {
       setOpenDropdown(label);
     }
   };
 
-  const handleDropdownClose = () => {
-    if (isDesktop) {
-      setOpenDropdown(null);
+  const handleDropdownClose = (event, label) => {
+    if (!isDesktop) return;
+    const relatedTarget = event?.relatedTarget;
+    if (relatedTarget && relatedTarget.closest(`[data-dropdown="${label}"]`)) {
+      return;
     }
+    closeDropdownTimer.current = setTimeout(() => {
+      setOpenDropdown((current) => (current === label ? null : current));
+      closeDropdownTimer.current = null;
+    }, 300);
   };
 
   const handleNavLinkClick = (event, item) => {
@@ -104,6 +127,10 @@ const Navbar = () => {
   };
 
   const handleDropdownNavigation = (path) => {
+    if (closeDropdownTimer.current) {
+      clearTimeout(closeDropdownTimer.current);
+      closeDropdownTimer.current = null;
+    }
     navigate(path);
     setOpenDropdown(null);
     setIsOpen(false);
@@ -138,7 +165,25 @@ const Navbar = () => {
           className={`collapse navbar-collapse justify-content-end ${isOpen ? "show" : ""}`}
           id="navbarSupportedContent"
         >
-          <ul className="navbar-nav nav-links mb-3 mb-lg-0">
+          <ul
+            className="navbar-nav nav-links mb-3 mb-lg-0"
+            onMouseEnter={() => {
+              if (closeDropdownTimer.current) {
+                clearTimeout(closeDropdownTimer.current);
+                closeDropdownTimer.current = null;
+              }
+            }}
+            onMouseLeave={() => {
+              if (!isDesktop) return;
+              if (closeDropdownTimer.current) {
+                clearTimeout(closeDropdownTimer.current);
+              }
+              closeDropdownTimer.current = setTimeout(() => {
+                setOpenDropdown(null);
+                closeDropdownTimer.current = null;
+              }, 500);
+            }}
+          >
             {navItems.map((item) => {
               const isActive = location.pathname === item.path;
               const isDropdownOpen = openDropdown === item.label;
@@ -148,8 +193,9 @@ const Navbar = () => {
                   className={`nav-item d-flex align-items-center ${item.hasDropdown ? "has-dropdown" : ""} ${
                     item.label === "Career Lab" ? "career-lab" : ""
                   } ${isDropdownOpen ? "dropdown-open" : ""}`}
-                  onMouseEnter={() => item.hasDropdown && handleDropdownOpen(item.label)}
-                  onMouseLeave={() => item.hasDropdown && handleDropdownClose()}
+                  data-dropdown={item.label}
+                  onMouseEnter={(event) => item.hasDropdown && handleDropdownOpen(item.label)}
+                  onMouseLeave={(event) => item.hasDropdown && handleDropdownClose(event, item.label)}
                 >
                   <div className="nav-link-wrapper">
                     <Link
@@ -178,7 +224,11 @@ const Navbar = () => {
                   {item.hasDropdown && item.dropdownItems && (
                     <>
                       {isDesktop ? (
-                        <ul className={`dropdown-menu-custom ${isDropdownOpen ? "show" : ""}`}>
+                        <ul
+                          className={`dropdown-menu-custom ${isDropdownOpen ? "show" : ""}`}
+                          data-dropdown={item.label}
+                          onMouseLeave={(event) => handleDropdownClose(event, item.label)}
+                        >
                           {item.dropdownItems.map((dropdownItem) => {
                             const isDropdownActive = location.pathname === dropdownItem.path;
                             return (
@@ -202,7 +252,7 @@ const Navbar = () => {
                               setOpenDropdown(null);
                             }}
                           />
-                          <div className={`mobile-dropdown-panel ${isDropdownOpen ? "show" : ""}`}>
+                          <div className={`mobile-dropdown-panel ${isDropdownOpen ? "show" : ""}`} data-dropdown={item.label}>
                             <div className="mobile-dropdown-body">
                               {item.dropdownItems.map((dropdownItem) => {
                                 const isDropdownActive = location.pathname === dropdownItem.path;

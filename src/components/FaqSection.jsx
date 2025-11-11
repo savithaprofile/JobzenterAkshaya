@@ -69,6 +69,11 @@ export default function FaqSection() {
         <div className="faq-side d-flex flex-column align-items-center text-center">
           <div className="faq-blob position-relative d-flex align-items-center justify-content-center">
             <img
+              src="/Vector 2.png"
+              alt="outer blob"
+              className="faq-blob-outline position-absolute"
+            />
+            <img
               src="/Vector 1.png"
               alt="blob"
               className="faq-blob-image position-absolute"
